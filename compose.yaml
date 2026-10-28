@@ -1,0 +1,6 @@
+services:
+  practica7electiva:
+    image: practica7electiva
+    build:
+      context: .
+      dockerfile: ./Dockerfile

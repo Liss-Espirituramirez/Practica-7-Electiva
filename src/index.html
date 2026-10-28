@@ -14,24 +14,30 @@
     <p id="resultado">Pulsa el botón para verificar MySQL.</p>
 
     <script>
-        document.getElementById("comprobar").addEventListener("click", async () => {
-            const resultado = document.getElementById("resultado");
-            resultado.textContent = "Conectando...";
+      
+document.getElementById("comprobar").addEventListener("click", async () => {
+    const resultado = document.getElementById("resultado");
 
-            try {
-                const respuesta = await fetch("/api");
-                const datos = await respuesta.json();
+    try {
+        const respuesta = await fetch("/api");
+        const texto = await respuesta.text();
 
-                if (!respuesta.ok) {
-                    throw new Error(datos.error || datos.mensaje);
-                }
+        console.log("Respuesta del servidor:", texto);
 
-                resultado.textContent =
-                    `${datos.conexion}. Base de datos: ${datos.baseDatos}`;
-            } catch (error) {
-                resultado.textContent = `Error: ${error.message}`;
-            }
-        });
+        if (!respuesta.ok) {
+            throw new Error(`Error HTTP: ${respuesta.status}`);
+        }
+
+        const datos = JSON.parse(texto);
+
+        resultado.textContent =
+            `${datos.mensaje}: ${datos.conexion}. Base de datos: ${datos.baseDatos}`;
+    } catch (error) {
+        resultado.textContent = `Error: ${error.message}`;
+        console.error("Error al comprobar la conexión:", error);
+    }
+});
+
     </script>
 </body>
 </html>
