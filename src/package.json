@@ -1,0 +1,14 @@
+
+{
+  "name": "hola-mundo-mysql",
+  "version": "1.0.0",
+  "description": "Aplicacion web conectada a MySQL con Docker",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "mysql2": "^3.14.0"
+  }
+}
